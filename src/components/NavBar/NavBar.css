@@ -3,15 +3,19 @@
     height: 80px;
     width: 100%;
     z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navbar-left{
     height: 100%;
-    width: 100%;
+    /* width: 100%; */
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     text-align: center;
     /* padding: 3px; */
 }
@@ -30,4 +34,13 @@
 
     display: flex;
     align-items: center;
+}
+
+.login-button-container{
+    margin: 25px;
+}
+
+.login-button{
+    width: 80px;
+    height: 40px;
 }
