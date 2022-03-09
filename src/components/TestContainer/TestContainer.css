@@ -1,0 +1,18 @@
+.test-container{
+    background-color : #fff;
+    margin: 64px 0;
+    margin: 10%;
+    min-height: 500px;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
+.try-again-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}

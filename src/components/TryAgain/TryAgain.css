@@ -1,0 +1,23 @@
+.try-again-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    margin: 0;
+}
+
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    /* align-items: s; */
+}
+
+.end-buttons{
+    margin: 4px;
+    font-size: 20px;
+    /* margin: 70px; */
+}

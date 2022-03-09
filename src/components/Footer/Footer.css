@@ -1,0 +1,19 @@
+.footer-container{
+    background: #2d3436;
+    height: 80px;
+    width: 100%;
+    z-index: 5;
+
+    display: flex;
+    /* justify-content: center; */
+    align-items:flex-end;
+}
+
+.social-media-icons{
+    /* padding: 2px; */
+}
+
+.social-media{
+    margin-left: 15px;
+    /* padding: 5px; */
+}
