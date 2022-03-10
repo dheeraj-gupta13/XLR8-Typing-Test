@@ -1,7 +1,14 @@
 import React from 'react';
+import TestLetter from '../TestLetter/TestLetter';
 import './TypingChallenge.css';
 
-function TypingChallenge({ timeRemaining, timerStarted, selectedParagraph }) {
+function TypingChallenge({
+    timeRemaining,
+    timerStarted,
+    selectedParagraph,
+    testInfo,
+}) {
+
     return (
         <>
             <div className="typing-speed-container">
@@ -13,7 +20,7 @@ function TypingChallenge({ timeRemaining, timerStarted, selectedParagraph }) {
                             : `0${timeRemaining}`}
                     </div>
                 </div>
-                {/* console.log(tie) */}
+
                 {!timerStarted && (
                     <div className="timer-info">Start typing the test now!</div>
                 )}
@@ -22,7 +29,11 @@ function TypingChallenge({ timeRemaining, timerStarted, selectedParagraph }) {
             <div className="text-area-container">
                 <div className="text-area-left">
                     <div className="textarea test-paragraph">
-                        {selectedParagraph}
+                        {
+                            testInfo.map((characterObj)=>{
+                                return <TestLetter testLetterInfo={characterObj}/>
+                            })
+                        }
                     </div>
                 </div>
                 <div className="text-area-right">

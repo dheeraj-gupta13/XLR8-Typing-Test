@@ -14,6 +14,7 @@ function TestContainer({
     wpm,
     timeRemaining,
     timerStarted,
+    testInfo
 }) {
 
     return (
@@ -28,6 +29,7 @@ function TestContainer({
                             para={para}
                             timeRemaining={timeRemaining}
                             timerStarted={timerStarted}
+                            testInfo={testInfo}
                         />
                     </div>
                 ) : (

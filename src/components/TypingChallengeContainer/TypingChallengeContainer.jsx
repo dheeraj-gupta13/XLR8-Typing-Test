@@ -10,6 +10,7 @@ function TypingChallengeContainer({
     wpm,
     timeRemaining,
     timerStarted,
+    testInfo
 }) {
     return (
         <>
@@ -23,7 +24,10 @@ function TypingChallengeContainer({
                         cardName={'Characters'}
                         cardValue={characters}
                     />
-                    <ChallengeDetailsCard cardName={'Speed'} cardValue={wpm} />
+                    <ChallengeDetailsCard 
+                        cardName={'Speed'} 
+                        cardValue={wpm} 
+                    />
                 </div>
 
                 <div className="typing-playground">
@@ -31,6 +35,7 @@ function TypingChallengeContainer({
                         timeRemaining={timeRemaining}
                         timerStarted={timerStarted}
                         selectedParagraph={para}
+                        testInfo={testInfo}
                     />
                 </div>
             </div>
