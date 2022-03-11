@@ -10,7 +10,8 @@ function TypingChallengeContainer({
     wpm,
     timeRemaining,
     timerStarted,
-    testInfo
+    testInfo,
+    onInputChange
 }) {
     return (
         <>
@@ -36,6 +37,7 @@ function TypingChallengeContainer({
                         timerStarted={timerStarted}
                         selectedParagraph={para}
                         testInfo={testInfo}
+                        onInputChange={onInputChange}
                     />
                 </div>
             </div>

@@ -14,7 +14,9 @@ function TestContainer({
     wpm,
     timeRemaining,
     timerStarted,
-    testInfo
+    testInfo,
+    onInputChange,
+    startAgain
 }) {
 
     return (
@@ -30,6 +32,7 @@ function TestContainer({
                             timeRemaining={timeRemaining}
                             timerStarted={timerStarted}
                             testInfo={testInfo}
+                            onInputChange={onInputChange}
                         />
                     </div>
                 ) : (
@@ -38,6 +41,7 @@ function TestContainer({
                             words={words}
                             characters={character}
                             wpm={wpm}
+                            startAgain={startAgain}
                         />
                     </div>
                 )}

@@ -26,7 +26,6 @@
 .text-area-container{
     display: flex;
     flex-direction: row;
-    height: 300px;
 }
 
 
@@ -39,20 +38,28 @@
     outline: none;
     resize: none;
     background-color: azure;
+   
+}
+
+.text-area-typeHere{
+    font-size: 19px;
+    line-height: 19px;
 }
 
 .test-paragraph{
-    background-color:yellowgreen;
+    border-radius: 10px;
+    background-color:rgb(52, 56, 44);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
 }
 
 .text-area-left{
-    background-color: aqua;
     width: 50%;
     margin:  20px;
 }
 
 .text-area-right{
-    background-color: yellow;
     width: 50%;
     margin:  20px;
+   
 }

@@ -1,23 +1,46 @@
-.try-again-container{
+.try-again-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-h2{
+h2 {
     margin: 0;
 }
 
-.button{
+.button {
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-around;
     /* align-items: s; */
 }
 
-.end-buttons{
+.end-buttons {
     margin: 4px;
     font-size: 20px;
-    /* margin: 70px; */
+    margin: 4px;
+    border-radius: 20px;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    cursor: pointer;
+}
+
+.end-buttons:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.start-again-btn{
+    background: #cfef00;
+}
+
+.share-btn{
+    background-color: #4267B2
+}
+
+.tweet-btn{
+    background-color: #1DA1F2;
 }
