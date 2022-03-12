@@ -1,11 +1,14 @@
-import './App.css';
-import { useState, useEffect, React } from 'react';
-import NavBar from './components/NavBar/NavBar';
-import LandingPage from './components/LandingPage/LandingPage';
-import Footer from './components/Footer/Footer';
-import ChallengeSection from './components/ChallengeSection/ChallengeSection';
+import "./App.css";
+import { useState, useEffect, React } from "react";
 
-import { SAMPLE_PARAGRAPHS } from './para/data';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
+import LandingPage from "./components/LandingPage/LandingPage";
+import Footer from "./components/Footer/Footer";
+import ChallengeSection from "./components/ChallengeSection/ChallengeSection";
+
+import { SAMPLE_PARAGRAPHS } from "./para/data";
+import Auth from "./components/Auth/Auth";
 
 const TotalTime = 60;
 
@@ -13,153 +16,167 @@ const dataArray = SAMPLE_PARAGRAPHS;
 console.log(SAMPLE_PARAGRAPHS);
 
 function App() {
-    const [para, setPara] = useState('Loading...');
-    const [timerStarted, setTimerStarted] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(TotalTime);
-    const [words, setWords] = useState(0);
-    const [character, setCharacter] = useState(0);
-    const [wpm, setWpm] = useState(0);
-    const [testInfo, setTestInfo] = useState([]);
+  const user = false;
 
-    const fetchNewPara = () => {
-        // fetch(serviceUrl)
-        //     .then((response) => response.text())
-        //     .then((data) => {
-        let idx = Math.floor(Math.random() * 10);
-        const paraArray = dataArray[idx].split('');
+  const [para, setPara] = useState("Loading...");
+  const [timerStarted, setTimerStarted] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(TotalTime);
+  const [words, setWords] = useState(0);
+  const [character, setCharacter] = useState(0);
+  const [wpm, setWpm] = useState(0);
+  const [testInfo, setTestInfo] = useState([]);
 
-        const testInfoTemp = paraArray.map((letter) => {
-            return {
-                testLetter: letter,
-                status: 'notAttempted',
-                isNext: 'no',
-            };
-        });
+  const fetchNewPara = () => {
+    // fetch(serviceUrl)
+    //     .then((response) => response.text())
+    //     .then((data) => {
+    let idx = Math.floor(Math.random() * 10);
+    const paraArray = dataArray[idx].split("");
 
-        setTestInfo(testInfoTemp);
-        setPara(dataArray[idx]);
-        // setTimerStarted(false);
-        // });
-    };
+    const testInfoTemp = paraArray.map((letter) => {
+      return {
+        testLetter: letter,
+        status: "notAttempted",
+        isNext: "no",
+      };
+    });
 
-    useEffect(() => {
-        fetchNewPara();
-    }, []);
+    setTestInfo(testInfoTemp);
+    setPara(dataArray[idx]);
+    // setTimerStarted(false);
+    // });
+  };
 
-    // renders -> either change in timeRemaining, or timeStarted
-    useEffect(() => {
-        console.log(timeRemaining);
-        if (!timerStarted) return;
+  useEffect(() => {
+    fetchNewPara();
+  }, []);
 
-        let IntervalId = null;
-        setTimerStarted(true); // set time started as true
+  // renders -> either change in timeRemaining, or timeStarted
+  useEffect(() => {
+    console.log(timeRemaining);
+    if (!timerStarted) return;
 
-        if (timeRemaining > 0) {
-            IntervalId = setInterval(() => {
-                const timeSpend = TotalTime - timeRemaining;
-                const wpm = timeSpend > 0 ? (words / timeSpend) * TotalTime : 0;
-                setTimeRemaining((timeRemaining) => timeRemaining - 1);
-                setWpm(Math.round(wpm));
-            }, 1000);
-        } else {
-            clearInterval(IntervalId);
-        }
+    let IntervalId = null;
+    setTimerStarted(true); // set time started as true
 
-        return () => clearInterval(IntervalId);
-    }, [timeRemaining, timerStarted]);
+    if (timeRemaining > 0) {
+      IntervalId = setInterval(() => {
+        const timeSpend = TotalTime - timeRemaining;
+        const wpm = timeSpend > 0 ? (words / timeSpend) * TotalTime : 0;
+        setTimeRemaining((timeRemaining) => timeRemaining - 1);
+        setWpm(Math.round(wpm));
+      }, 1000);
+    } else {
+      clearInterval(IntervalId);
+    }
 
-    // called when input is given.
-    const handleInputChange = (inputValue) => {
-        if (timerStarted === false) {
-            // User started typing, Start the timer.
-            setTimerStarted(true);
-        }
+    return () => clearInterval(IntervalId);
+  }, [timeRemaining, timerStarted]);
 
-        const character = inputValue.length;
-        const words = inputValue.split(' ').length;
-        const index = character - 1;
+  // called when input is given.
+  const handleInputChange = (inputValue) => {
+    if (timerStarted === false) {
+      // User started typing, Start the timer.
+      setTimerStarted(true);
+    }
 
-        for (let idx = index + 1; idx < para.length; idx++) {
-            testInfo[idx].status = 'notAttempted';
-        }
+    const character = inputValue.length;
+    const words = inputValue.split(" ").length;
+    const index = character - 1;
 
-        // underflow case, when user had typed nothing
-        if (index < 0) {
-            const testInfoTemp = [
-                {
-                    testLetter: testInfo[0].testLetter,
-                    status: 'notAttempted',
-                },
-                ...testInfo.slice(1),
-            ];
+    for (let idx = index + 1; idx < para.length; idx++) {
+      testInfo[idx].status = "notAttempted";
+    }
 
-            for (var idx = 0; idx < para.length; idx++) {
-                testInfoTemp[idx].isNext = 'no';
-            }
+    // underflow case, when user had typed nothing
+    if (index < 0) {
+      const testInfoTemp = [
+        {
+          testLetter: testInfo[0].testLetter,
+          status: "notAttempted",
+        },
+        ...testInfo.slice(1),
+      ];
 
-            setTestInfo(testInfoTemp);
-            setCharacter(character);
-            setWords(words);
+      for (var idx = 0; idx < para.length; idx++) {
+        testInfoTemp[idx].isNext = "no";
+      }
 
-            return;
-        }
+      setTestInfo(testInfoTemp);
+      setCharacter(character);
+      setWords(words);
 
-        // overflow case, when user typed all the given paragraph
-        if (index >= para.length) {
-            setCharacter(character);
-            setWords(words);
-            return;
-        }
+      return;
+    }
 
-        // Handle the backspace
-        const testInfoTemp = testInfo;
+    // overflow case, when user typed all the given paragraph
+    if (index >= para.length) {
+      setCharacter(character);
+      setWords(words);
+      return;
+    }
 
-        if (!(index === para.length - 1)) {
-            testInfoTemp[index + 1].status = 'notAttempted';
-            for (let idx = 0; idx < para.length; idx++) {
-                testInfoTemp[idx].isNext = 'no';
-            }
-            testInfoTemp[index + 1].isNext = 'yes';
-        }
+    // Handle the backspace
+    const testInfoTemp = testInfo;
 
-        const isCorrect = inputValue[index] === testInfo[index].testLetter;
-        testInfoTemp[index].status = isCorrect ? 'correct' : 'incorrect';
+    if (!(index === para.length - 1)) {
+      testInfoTemp[index + 1].status = "notAttempted";
+      for (let idx = 0; idx < para.length; idx++) {
+        testInfoTemp[idx].isNext = "no";
+      }
+      testInfoTemp[index + 1].isNext = "yes";
+    }
 
-        setTestInfo(testInfo);
-        setCharacter(character);
-        setWords(words);
-    };
+    const isCorrect = inputValue[index] === testInfo[index].testLetter;
+    testInfoTemp[index].status = isCorrect ? "correct" : "incorrect";
 
-    const startAgain = () => {
-        setTimerStarted(false);
-        fetchNewPara();
+    setTestInfo(testInfo);
+    setCharacter(character);
+    setWords(words);
+  };
 
-        setTimeRemaining(TotalTime);
-        setCharacter(0);
-        setWords(0);
-        setWpm(0);
-    };
+  const startAgain = () => {
+    setTimerStarted(false);
+    fetchNewPara();
 
-    return (
-        <>
-            <div className="app">
-                <NavBar />
-                <LandingPage />
-                <ChallengeSection
-                    para={para}
-                    words={words}
-                    character={character}
-                    wpm={wpm}
-                    timeRemaining={timeRemaining}
-                    timerStarted={timerStarted}
-                    testInfo={testInfo}
-                    onInputChange={handleInputChange}
-                    startAgain={startAgain}
-                />
-                <Footer />
-            </div>
-        </>
-    );
+    setTimeRemaining(TotalTime);
+    setCharacter(0);
+    setWords(0);
+    setWpm(0);
+  };
+
+  return (
+    <BrowserRouter>
+      <div className="app">
+        <NavBar />
+        <Routes>
+          <Route path="/" exact element={
+              <>
+                  <LandingPage />
+          <ChallengeSection
+                para={para}
+                words={words}
+                character={character}
+                wpm={wpm}
+                timeRemaining={timeRemaining}
+                timerStarted={timerStarted}
+                testInfo={testInfo}
+                onInputChange={handleInputChange}
+                startAgain={startAgain}
+              />
+              <Footer />
+               </>   
+              }    
+           />
+          <Route
+            path="/auth"
+            exact
+            element={!user ? <Auth /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
