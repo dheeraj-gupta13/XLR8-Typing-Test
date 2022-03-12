@@ -13,5 +13,10 @@
 
 .test-letter-not-attempted{
     color: #f4d9f4b5;
-    
+}
+
+.yes{
+    font-weight: 600;
+    font-size: 21px;
+    text-decoration: underline;
 }

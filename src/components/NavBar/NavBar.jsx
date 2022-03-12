@@ -8,16 +8,16 @@ function NavBar() {
             <div className="navbar-container">
                 <div className="navbar-left">
                     <img src={thunder} alt="" className="thunder" />
-                    <h1 className="logo-name">Accelerate</h1>
+                    <h1 className="logo-name">XLR8</h1>
                 </div>
-                <div className="login-button-container">
+                {/* <div className="login-button-container">
                     <button
                         className="login-button"
                         type="button"
                     >
                         Login
                     </button>
-                </div>
+                </div> */}
             </div>
         </>
     );

@@ -3,6 +3,7 @@ import './TestLetter.css';
 
 function TestLetter({ testLetterInfo }) {
     const { status } = testLetterInfo;
+    const { isNext } = testLetterInfo;
 
     const statusClass = {
         correct: 'test-letter-correct',
@@ -10,8 +11,13 @@ function TestLetter({ testLetterInfo }) {
         notAttempted: 'test-letter-not-attempted',
     }[status];
 
+    const isNextClass = {
+        no: 'no',
+        yes: 'yes',
+    }[isNext];
+
     return (
-        <span className={`test-letter ${statusClass}`}>
+        <span className={`test-letter ${statusClass} ${isNextClass}`}>
             {testLetterInfo.testLetter}
         </span>
     );

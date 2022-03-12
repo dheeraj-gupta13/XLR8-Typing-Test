@@ -8,11 +8,11 @@ function TryAgain({ words, characters, wpm, startAgain}) {
             <h1>Test Results</h1>
 
             <div className="result-container">
-                <p>
+                {/* <p> */}
                     <h2>Characters : {characters}</h2>
                     <h2>Words : {words}</h2>
                     <h2>wpm : {wpm}</h2>
-                </p>
+                {/* </p> */}
             </div>
 
             <div className='button'>

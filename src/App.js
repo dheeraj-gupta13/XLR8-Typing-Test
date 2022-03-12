@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, React, useRef, useCallback } from 'react';
+import { useState, useEffect, React } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
 import Footer from './components/Footer/Footer';
@@ -28,6 +28,7 @@ function App() {
                     return {
                         testLetter: letter,
                         status: 'notAttempted',
+                        isNext: 'no',
                     };
                 });
 
@@ -41,8 +42,9 @@ function App() {
         fetchNewPara();
     }, []);
 
+    // renders -> either change in timeRemaining, or timeStarted
     useEffect(() => {
-    
+        console.log(timeRemaining);
         if (!timerStarted) return;
 
         let IntervalId = null;
@@ -50,7 +52,6 @@ function App() {
 
         if (timeRemaining > 0) {
             IntervalId = setInterval(() => {
-                console.log(timeRemaining);
                 const timeSpend = TotalTime - timeRemaining;
                 const wpm = timeSpend > 0 ? (words / timeSpend) * TotalTime : 0;
                 setTimeRemaining((timeRemaining) => timeRemaining - 1);
@@ -63,18 +64,20 @@ function App() {
         return () => clearInterval(IntervalId);
     }, [timeRemaining, timerStarted]);
 
-    
-
     // called when input is given.
     const handleInputChange = (inputValue) => {
-
-        if(timerStarted == false){
+        if (timerStarted === false) {
+            // User started typing, Start the timer.
             setTimerStarted(true);
         }
 
         const character = inputValue.length;
         const words = inputValue.split(' ').length;
         const index = character - 1;
+
+        for (let idx = index + 1; idx < para.length; idx++) {
+            testInfo[idx].status = 'notAttempted';
+        }
 
         // underflow case, when user had typed nothing
         if (index < 0) {
@@ -85,6 +88,10 @@ function App() {
                 },
                 ...testInfo.slice(1),
             ];
+
+            for (var idx = 0; idx < para.length; idx++) {
+                testInfoTemp[idx].isNext = 'no';
+            }
 
             setTestInfo(testInfoTemp);
             setCharacter(character);
@@ -103,8 +110,13 @@ function App() {
         // Handle the backspace
         const testInfoTemp = testInfo;
 
-        if (!(index === para.length - 1))
+        if (!(index === para.length - 1)) {
             testInfoTemp[index + 1].status = 'notAttempted';
+            for (let idx = 0; idx < para.length; idx++) {
+                testInfoTemp[idx].isNext = 'no';
+            }
+            testInfoTemp[index + 1].isNext = 'yes';
+        }
 
         const isCorrect = inputValue[index] === testInfo[index].testLetter;
         testInfoTemp[index].status = isCorrect ? 'correct' : 'incorrect';
