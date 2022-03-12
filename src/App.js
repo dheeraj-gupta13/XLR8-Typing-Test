@@ -5,9 +5,12 @@ import LandingPage from './components/LandingPage/LandingPage';
 import Footer from './components/Footer/Footer';
 import ChallengeSection from './components/ChallengeSection/ChallengeSection';
 
+import { SAMPLE_PARAGRAPHS } from './para/data';
+
 const TotalTime = 60;
 
-const serviceUrl = 'http://metaphorpsum.com/paragraphs/1/9';
+const dataArray = SAMPLE_PARAGRAPHS;
+console.log(SAMPLE_PARAGRAPHS);
 
 function App() {
     const [para, setPara] = useState('Loading...');
@@ -19,23 +22,24 @@ function App() {
     const [testInfo, setTestInfo] = useState([]);
 
     const fetchNewPara = () => {
-        fetch(serviceUrl)
-            .then((response) => response.text())
-            .then((data) => {
-                const paraArray = data.split('');
+        // fetch(serviceUrl)
+        //     .then((response) => response.text())
+        //     .then((data) => {
+        let idx = Math.floor(Math.random() * 10);
+        const paraArray = dataArray[idx].split('');
 
-                const testInfoTemp = paraArray.map((letter) => {
-                    return {
-                        testLetter: letter,
-                        status: 'notAttempted',
-                        isNext: 'no',
-                    };
-                });
+        const testInfoTemp = paraArray.map((letter) => {
+            return {
+                testLetter: letter,
+                status: 'notAttempted',
+                isNext: 'no',
+            };
+        });
 
-                setTestInfo(testInfoTemp);
-                setPara(data);
-                // setTimerStarted(false);
-            });
+        setTestInfo(testInfoTemp);
+        setPara(dataArray[idx]);
+        // setTimerStarted(false);
+        // });
     };
 
     useEffect(() => {
