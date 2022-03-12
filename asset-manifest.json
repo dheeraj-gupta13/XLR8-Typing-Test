@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/XLR8-Typing-Test/static/css/main.94fb3d73.css",
+    "main.js": "/XLR8-Typing-Test/static/js/main.20b77e0e.js",
+    "static/media/xlr8_3.png": "/XLR8-Typing-Test/static/media/xlr8_3.06fbf91094d6afb4de82.png",
+    "static/media/thunder-yellow.png": "/XLR8-Typing-Test/static/media/thunder-yellow.6f07c313b03c7d69d446.png",
+    "index.html": "/XLR8-Typing-Test/index.html",
+    "main.94fb3d73.css.map": "/XLR8-Typing-Test/static/css/main.94fb3d73.css.map",
+    "main.20b77e0e.js.map": "/XLR8-Typing-Test/static/js/main.20b77e0e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94fb3d73.css",
+    "static/js/main.20b77e0e.js"
+  ]
+}
